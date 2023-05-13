@@ -1,0 +1,10 @@
+add_action( 'wp_loaded', 'delete_completed_orders' );
+function delete_completed_orders() {
+   $orders = wc_get_orders( array(
+      'limit' => -1,
+      'status' => 'completed'
+   ) );
+   foreach ( $orders as $order ) {
+      $order->delete( true );
+   }
+}
